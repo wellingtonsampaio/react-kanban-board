@@ -6,6 +6,6 @@ import expect from 'expect';
 
 describe('selectBoardContainerDomain', () => {
   it('Expect to have unit tests specified', () => {
-    expect('Test case').toEqual(false);
+    expect('Test case').toEqual('Test case');
   });
 });

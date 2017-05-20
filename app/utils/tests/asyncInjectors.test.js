@@ -3,7 +3,7 @@
  */
 
 import expect from 'expect';
-import configureStore from 'store.js';
+import configureStore from '../../store';
 import { memoryHistory } from 'react-router';
 import { put } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
@@ -12,7 +12,7 @@ import {
   injectAsyncReducer,
   injectAsyncSagas,
   getAsyncInjectors,
-} from 'utils/asyncInjectors';
+} from '../asyncInjectors';
 
 // Fixtures
 
@@ -47,7 +47,7 @@ describe('asyncInjectors', () => {
       const { injectReducer, injectSagas } = getAsyncInjectors(store);
 
       injectReducer('test', reducer);
-      injectSagas(sagas);
+      injectSagas('test', sagas);
 
       const actual = store.getState().get('test');
       const expected = initialState.merge({ reduced: 'yup' });
@@ -132,7 +132,7 @@ describe('asyncInjectors', () => {
       it('given a store, it should provide a function to inject a saga', () => {
         const injectSagas = injectAsyncSagas(store);
 
-        injectSagas(sagas);
+        injectSagas('test', sagas);
 
         const actual = store.getState().get('test');
         const expected = initialState.merge({ reduced: 'yup' });
