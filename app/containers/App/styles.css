@@ -1,0 +1,114 @@
+/**
+ * styles.css
+ *
+ * App container styles
+ */
+
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+
+.container {
+  display: block;
+  margin: 10px;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 95%;
+  width: 100vw;
+}
+
+h3 {
+  font-size: 1.2em;
+  font-weight: 400;
+  color: #562F72;
+}
+
+a {
+  color: #323232;
+}
+
+p {
+  margin-bottom: 1em;
+  font-weight: 200;
+}
+
+#root {
+  height: 100%;
+}
+
+.app {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+section {
+  /* flex: 1; would be enough but it looks bad in IE */
+  flex: 1 0 auto;
+}
+
+/* Unimportant part */
+body {
+  font-family: 'Helvetica Neue', Helvetica, 'Open Sans', Arial, 'Lucida Grande', Roboto, sans-serif;
+  font-size: 12px;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+header,
+section,
+footer {
+  padding: 0.5em;
+  color: white;
+}
+
+header {
+  border-radius: 20px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  text-align: center;
+  background-color: #009;
+  color: #FFF;
+  font-size: 28px;
+  font-weight: 200;
+}
+
+section {
+  overflow: auto;
+  height: 70vh;
+  background-color: #FFF;
+}
+
+footer {
+  background-color: #F4F4F4;
+  color: #562F72;
+}
+
+input {
+  box-sizing: border-box;
+  flex: 1;
+  width: 100%;
+  font-size: 1em;
+  background-color: transparent;
+  color: #323232;
+  border: solid #562F72 1px;
+  border-radius: 20px;
+  padding: 8px 10px;
+}
+
+@media (min-width: 600px) {
+  #root {
+    height: 100%;
+    border-left: 1px dashed rgba(0, 0, 0, 0.2);
+    border-right: 1px dashed rgba(0, 0, 0, 0.2);
+    margin-left: auto;
+    max-width: 500px;
+    margin-right: auto;
+  }
+}
