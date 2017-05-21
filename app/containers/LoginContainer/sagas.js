@@ -19,7 +19,7 @@ function* authorizeUser() {
     yield put(push('/board'));
   } catch (e) {
     // Or  dispatch the action to notify the failure
-    yield put(authorizeFailure(e.message));
+    yield put(authorizeFailure());
   }
 }
 
