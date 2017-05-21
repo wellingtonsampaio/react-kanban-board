@@ -1,15 +1,26 @@
 /*
- *
- * BoardContainer
- *
+ * BoardContainer container component that manages the application's Kanban Board.
  */
 
 import React from 'react';
 import { connect } from 'react-redux';
 import selectBoardContainer from './selectors';
+import { loadLists } from './actions';
+
 import Board from '../../components/Board';
 
 export class BoardContainer extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  // Component props validation
+  static propTypes = {
+    loadLists: React.PropTypes.func,
+  };
+
+  componentWillMount() {
+    // Load the Kanban Lists when component will mount
+    this.props.loadLists();
+  }
+
   render() {
     return (
       <div>
@@ -23,7 +34,8 @@ const mapStateToProps = selectBoardContainer();
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    // Dispatch an action that loads the Kanban lists
+    loadLists: () => dispatch(loadLists()),
   };
 }
 

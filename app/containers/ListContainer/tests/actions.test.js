@@ -4,7 +4,7 @@ import {
 import {
 } from '../constants';
 
-describe('BoardContainer actions', () => {
+describe('ListContainer actions', () => {
   describe('Default Action', () => {
     it('Expect to have unit tests specified', () => {
       expect(true).toEqual(true);

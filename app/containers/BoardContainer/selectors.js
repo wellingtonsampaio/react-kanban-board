@@ -1,19 +1,13 @@
+/*
+ * BoardContainer selector define the state to props mapping for the component.
+ */
+
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the boardContainer state domain
- */
+// Direct selector to the boardContainer state domain
 const selectBoardContainerDomain = () => state => state.get('boardContainer');
 
-/**
- * Other specific selectors
- */
-
-
-/**
- * Default selector used by BoardContainer
- */
-
+// Default selector used by BoardContainer
 const selectBoardContainer = () => createSelector(
   selectBoardContainerDomain(),
   (substate) => substate.toJS()

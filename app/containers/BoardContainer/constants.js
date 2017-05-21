@@ -1,7 +1,7 @@
 /*
- *
  * BoardContainer constants
- *
  */
 
-export const DEFAULT_ACTION = 'app/BoardContainer/DEFAULT_ACTION';
+ export const LOAD_LISTS = 'app/BoardContainer/LOAD_LISTS';
+ export const LOAD_LISTS_SUCCESS = 'app/BoardContainer/LOAD_LISTS_SUCCESS';
+ export const LOAD_LISTS_FAILURE = 'app/BoardContainer/LOAD_LISTS_FAILURE';

@@ -28,6 +28,9 @@ import { translationMessages } from './i18n';
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import 'sanitize.css/sanitize.css';
 
+// Import bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
 // Optionally, this could be changed to leverage a created history
@@ -51,7 +54,12 @@ const rootRoute = {
   childRoutes: createRoutes(store),
 };
 
+import authApiService from 'services/authApiService';
+window.handleClientLoad = () => {
+  authApiService.initialize().then(() => bootstrap());
+};
 
+// Initialize Google Tasks API
 const render = (translatedMessages) => {
   ReactDOM.render(
     <Provider store={store}>
@@ -82,14 +90,16 @@ if (module.hot) {
 }
 
 // Chunked polyfill for browsers without Intl support
-if (!window.Intl) {
-  Promise.all([
-    System.import('intl'),
-    System.import('intl/locale-data/jsonp/en.js'),
-  ]).then(() => render(translationMessages));
-} else {
-  render(translationMessages);
-}
+const bootstrap = () => {
+  if (!window.Intl) {
+    Promise.all([
+      System.import('intl'),
+      System.import('intl/locale-data/jsonp/en.js'),
+    ]).then(() => render(translationMessages));
+  } else {
+    render(translationMessages);
+  }
+};
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,

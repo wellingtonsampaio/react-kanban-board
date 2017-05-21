@@ -1,20 +1,26 @@
 /*
- *
- * BoardContainer reducer
- *
+ * BoardContainer reducer returns a new state for the component.
  */
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
+  LOAD_LISTS_SUCCESS,
+  LOAD_LISTS_FAILURE,
 } from './constants';
 
-const initialState = fromJS({});
+// Component initial state
+const initialState = fromJS({
+  lists: {},
+});
 
 function boardContainerReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
+    case LOAD_LISTS_SUCCESS:
+      // on success, assign the lists to the state
+      return state.set('lists', action.lists);
+    case LOAD_LISTS_FAILURE:
+      // on success, reset the lists to empty
+      return state.set('lists', {});
     default:
       return state;
   }

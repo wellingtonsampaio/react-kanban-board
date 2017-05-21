@@ -19,19 +19,40 @@ export default function createRoutes(store) {
   return [
     {
       path: '/',
+      name: 'login',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/LoginContainer/reducer'),
+          System.import('containers/LoginContainer/sagas'),
+          System.import('containers/LoginContainer'),
+        ]);
+        const renderRoute = loadModule(cb);
+        importModules.then(([loginContainerReducer, loginContainerSagas, component]) => {
+          injectReducer('loginContainer', loginContainerReducer.default);
+          injectSagas('loginContainer', loginContainerSagas.default);
+          renderRoute(component);
+        });
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/board',
       name: 'board',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           System.import('containers/BoardContainer/reducer'),
           System.import('containers/BoardContainer/sagas'),
+          System.import('containers/ListContainer/reducer'),
+          System.import('containers/ListContainer/sagas'),
           System.import('containers/BoardContainer'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('boardContainer', reducer.default);
-          injectSagas('boardContainer', sagas.default);
+        importModules.then(([boardContainerReducer, boardContainerSagas, listContainerReducer, listContainerSagas, component]) => {
+          injectReducer('boardContainer', boardContainerReducer.default);
+          injectSagas('boardContainer', boardContainerSagas.default);
+          injectReducer('listContainer', listContainerReducer.default);
+          injectSagas('listContainer', listContainerSagas.default);
           renderRoute(component);
         });
 
