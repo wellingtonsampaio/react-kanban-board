@@ -4,11 +4,25 @@
 
 import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
-import { LOAD_TASKS } from './constants';
-import { loadTasksSuccess, loadTasksFailure } from './actions';
+import { LOAD_TASKS, DELETE_TASK } from './constants';
+import { loadTasks, loadTasksSuccess, loadTasksFailure } from './actions';
 import tasksApiService from '../../services/tasksApiService';
 
-function* loadTasks(action) {
+// Sagas
+
+export function* loadTasksSaga() {
+  // Take every request to load tasks (there could be many instances of lists)
+  yield* takeEvery(LOAD_TASKS, loadTasksSagaAction);
+}
+
+export function* deleteTaskSaga() {
+  // Take every request to delete a task
+  yield* takeEvery(DELETE_TASK, deleteTask);
+}
+
+// Functions
+
+function* loadTasksSagaAction(action) {
   try {
     // Wait until the tasks are loaded
     const tasks = yield call(tasksApiService.list, action.listId);
@@ -21,12 +35,19 @@ function* loadTasks(action) {
   }
 }
 
-export function* loadTasksSaga() {
-  // Take every request to load tasks (there could be many instances of lists)
-  yield* takeEvery(LOAD_TASKS, loadTasks);
+function* deleteTask(action) {
+  try {
+    // Wait until the task is deleted
+    yield call(tasksApiService.delete, action.taskList, action.task);
+  } finally {
+    // reload the list
+    yield put(loadTasks(action.taskList));
+  }
 }
 
 // All sagas to be loaded
+
 export default [
   loadTasksSaga,
+  deleteTaskSaga,
 ];

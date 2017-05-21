@@ -4,12 +4,18 @@
 
 import React from 'react';
 import styles from './styles.css';
-import { Button } from 'react-bootstrap';
+import { Button, Jumbotron } from 'react-bootstrap';
 
 function Login({ onLogin }) {
   return (
     <div className={styles.login}>
-      <Button onClick={onLogin}>Sign in with Google</Button>
+      <Jumbotron>
+        <h1>React Kanban Board</h1>
+        <p>A Kanban Board application that uses Google Tasks as data store.</p>
+        <p>Sign in with your Google account to synchronize your Kanban Board tasks with the Google Tasks.</p>
+        <p>Once you agree to join, 3 new lists will be created on your Google Tasks account for the purpose of this application.</p>
+        <p><Button bsStyle="primary" onClick={onLogin}>Let's start</Button></p>
+      </Jumbotron>
     </div>
   );
 }

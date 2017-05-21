@@ -45,9 +45,10 @@ export default {
 
   // Delete a task
   delete(tasklist, task) {
-    return new Promise((resolve) => {
-      // TODO Implement
-      resolve(task, tasklist);
+    return new Promise((resolve, reject) => {
+      gapi.client.tasks.tasks.delete({ tasklist, task }).execute(
+        result => (result.error ? reject(result.error) : resolve(result))
+      );
     });
   },
 };

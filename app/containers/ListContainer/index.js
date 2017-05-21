@@ -5,7 +5,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import selectListContainer from './selectors';
-import { loadTasks } from './actions';
+import { loadTasks, deleteTask } from './actions';
 
 import List from '../../components/List';
 
@@ -29,7 +29,7 @@ export class ListContainer extends React.Component { // eslint-disable-line reac
 
     return (
       <div>
-        <List title={this.props.title} tasks={tasks} />
+        <List {...this.props} taskListId={this.props.id} tasks={tasks} />
       </div>
     );
   }
@@ -42,6 +42,8 @@ function mapDispatchToProps(dispatch) {
   return {
     // Dispatch an action that loads the tasks of the given Task List
     loadTasks: (listId) => dispatch(loadTasks(listId)),
+    // Dispatch an action to delete the given task
+    deleteTask: (taskList, task) => dispatch(deleteTask(taskList, task)),
   };
 }
 
