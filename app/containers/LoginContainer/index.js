@@ -13,9 +13,7 @@ export class LoginContainer extends React.Component { // eslint-disable-line rea
 
   render() {
     return (
-      <div>
-        <Login {...this.props} />
-      </div>
+      <Login {...this.props}></Login>
     );
   }
 }

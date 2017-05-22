@@ -5,8 +5,9 @@
 import React from 'react';
 import styles from './styles.css';
 import Task from '../Task';
-import { Button, ButtonGroup, Col, ControlLabel, Form, FormGroup, Glyphicon, ListGroup, ListGroupItem, Modal, Panel } from 'react-bootstrap';
+import { Button, ButtonGroup, Col, ControlLabel, Form, FormGroup, Glyphicon, Modal } from 'react-bootstrap';
 import TextInput from '../TextInput';
+import classNames from 'classnames';
 
 class List extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -59,9 +60,7 @@ class List extends React.Component { // eslint-disable-line react/prefer-statele
       });
       return;
     }
-    this.setState({
-      errorText: null,
-    });
+    this.setState({ errorText: null });
     this.closeNewTaskModal();
 
     this.props.addTask(this.props.taskListId, title);
@@ -72,7 +71,7 @@ class List extends React.Component { // eslint-disable-line react/prefer-statele
   }
 
   openNewTaskModal = () => {
-    this.setState({ showNewTaskModal: true });
+    this.setState({ showNewTaskModal: true, errorText: null });
   }
 
   render() {
@@ -80,7 +79,7 @@ class List extends React.Component { // eslint-disable-line react/prefer-statele
     const tasks = this.props.tasks
       .filter(task => task.title !== '')
       .map(task => (
-        <ListGroupItem key={task.id}>
+        <li key={task.id}>
           <Task
             key={task.id}
             task={task}
@@ -89,22 +88,24 @@ class List extends React.Component { // eslint-disable-line react/prefer-statele
             moveTask={this.onMoveTask}
           >
           </Task>
-        </ListGroupItem>
+        </li>
     ));
 
     let addTaskButton = null;
     if (this.props.canAddTask) {
-      addTaskButton = <Button className="pull-right" key="newTaskButton" bsStyle="success" onClick={this.openNewTaskModal}><Glyphicon glyph="glyphicon glyphicon-plus"></Glyphicon>&nbsp;New task</Button>;
+      addTaskButton = <Button className="pull-right" onClick={this.openNewTaskModal}><Glyphicon glyph="glyphicon glyphicon-plus"></Glyphicon></Button>;
     }
 
     return (
-      <div className={styles.list}>
-        <Panel header={this.props.title} bsStyle="success">
-          <ListGroup fill>
+      <div>
+        <div className={classNames(styles.taskList, 'hover-effect')}>
+          <div className={styles.taskListHead}>
+            <h3>{this.props.title} {addTaskButton}</h3>
+          </div>
+          <ul className={classNames(styles.taskListContent, 'list-unstyled')}>
             {tasks}
-          </ListGroup>
-          {addTaskButton}
-        </Panel>
+          </ul>
+        </div>
 
         <Modal show={this.state.showNewTaskModal} onHide={this.closeNewTaskModal}>
           <Modal.Header>
@@ -134,6 +135,7 @@ class List extends React.Component { // eslint-disable-line react/prefer-statele
             </ButtonGroup>
           </Modal.Footer>
         </Modal>
+
       </div>
     );
   }

@@ -23,9 +23,7 @@ export class BoardContainer extends React.Component { // eslint-disable-line rea
 
   render() {
     return (
-      <div>
-        <Board {...this.props} />
-      </div>
+      <Board {...this.props}></Board>
     );
   }
 }

@@ -37,7 +37,7 @@ class Board extends React.Component { // eslint-disable-line react/prefer-statel
     // Render a component for the To-Do list if one was informed
     const todoListComponent =
           this.props.lists.todoList !== undefined ?
-            <ListContainer id={this.props.lists.todoList.id} title="To-Do" canMoveTask moveTask={this.onMoveTask} canAddTask></ListContainer> :
+            <ListContainer id={this.props.lists.todoList.id} title="To Do" canMoveTask moveTask={this.onMoveTask} canAddTask></ListContainer> :
             <div />;
 
     // Render a component for the Doing list if one was informed
@@ -53,21 +53,19 @@ class Board extends React.Component { // eslint-disable-line react/prefer-statel
             <div />;
 
     return (
-      <div className={styles.board}>
-        <Grid fluid>
-          <Row>
-            <Col xs={12} md={4}>
-              {todoListComponent}
-            </Col>
-            <Col xs={12} md={4}>
-              {doingListComponent}
-            </Col>
-            <Col xs={12} md={4}>
-              {doneListComponent}
-            </Col>
-          </Row>
-        </Grid>
-      </div>
+      <Grid className={styles.board} fluid>
+        <Row>
+          <Col xs={12} md={4}>
+            {todoListComponent}
+          </Col>
+          <Col xs={12} md={4}>
+            {doingListComponent}
+          </Col>
+          <Col xs={12} md={4}>
+            {doneListComponent}
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 

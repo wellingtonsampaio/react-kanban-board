@@ -1,3 +1,43 @@
 .list { /* stylelint-disable */
+  width: 100%;
+  height: 100%;
+}
 
+.taskList {
+  position: relative;
+  margin-bottom: 15px;
+  border: 3px solid #eee;
+}
+
+.taskList:hover {
+  border: 3px solid grey;
+}
+
+.taskList:hover h4 {
+  color: #36d7ac;
+}
+
+.taskListHead {
+  text-align: center;
+}
+
+.taskListHead h3 {
+  margin: 0px;
+  line-height: normal;
+  font-weight: 300;
+  color: #fafafa;
+  padding: 12px 5px;
+  font-size: 27px;
+  background: grey;
+  border-bottom: solid 1px;
+}
+
+.taskListContent {
+  margin: 5px 0px 5px 0px;
+}
+
+.taskListContent li {
+  color: #888;
+  font-size: 12px;
+  padding: 5px 10px 5px 10px;
 }

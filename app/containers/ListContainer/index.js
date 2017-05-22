@@ -28,9 +28,7 @@ export class ListContainer extends React.Component { // eslint-disable-line reac
     const tasks = this.props[this.props.id] || [];
 
     return (
-      <div>
-        <List {...this.props} taskListId={this.props.id} tasks={tasks} />
-      </div>
+      <List {...this.props} taskListId={this.props.id} tasks={tasks}></List>
     );
   }
 

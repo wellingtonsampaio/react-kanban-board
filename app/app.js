@@ -31,6 +31,9 @@ import 'sanitize.css/sanitize.css';
 // Import bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// Import CSS reset and Global Styles
+import './global-styles';
+
 // Initialize the GAPI client and bootstrap the application
 import { initializeApi } from 'services/authApiService';
 initializeApi();
