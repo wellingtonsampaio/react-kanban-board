@@ -19,7 +19,7 @@ function boardContainerReducer(state = initialState, action) {
       // on success, assign the lists to the state
       return state.set('lists', action.lists);
     case LOAD_LISTS_FAILURE:
-      // on success, reset the lists to empty
+      // on failure, reset the lists to empty
       return state.set('lists', {});
     default:
       return state;

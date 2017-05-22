@@ -31,6 +31,7 @@ export function loadTasksSuccess(listId, tasks) {
 export function loadTasksFailure(listId, message) {
   return {
     type: LOAD_TASKS_FAILURE,
+    listId,
     message,
   };
 }
