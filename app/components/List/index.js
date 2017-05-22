@@ -19,12 +19,22 @@ class List extends React.Component { // eslint-disable-line react/prefer-statele
         title: React.PropTypes.string.isRequired,
       })
     ).isRequired,
+    canMoveTask: React.PropTypes.bool.isRequired,
     deleteTask: React.PropTypes.func.isRequired,
+    moveTask: React.PropTypes.func,
   };
 
   // delete the given task passing this list's ID as a param
   onDeleteTask = (task) => {
     this.props.deleteTask(this.props.taskListId, task.id);
+  }
+
+  // move the given task passing this list's ID as a param
+  onMoveTask = (task) => {
+    if (this.props.canMoveTask) {
+      // if this component is allowed to move tasks, dispatch the action
+      this.props.moveTask(this.props.taskListId, task);
+    }
   }
 
   render() {
@@ -33,7 +43,14 @@ class List extends React.Component { // eslint-disable-line react/prefer-statele
       .filter(task => task.title !== '')
       .map(task => (
         <ListGroupItem key={task.id}>
-          <Task key={task.id} task={task} deleteTask={this.onDeleteTask}></Task>
+          <Task
+            key={task.id}
+            task={task}
+            deleteTask={this.onDeleteTask}
+            canMoveTask={this.props.canMoveTask}
+            moveTask={this.onMoveTask}
+          >
+          </Task>
         </ListGroupItem>
     ));
 

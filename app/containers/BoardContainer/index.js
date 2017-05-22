@@ -5,7 +5,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import selectBoardContainer from './selectors';
-import { loadLists } from './actions';
+import { loadLists, moveTask } from './actions';
 
 import Board from '../../components/Board';
 
@@ -36,6 +36,8 @@ function mapDispatchToProps(dispatch) {
   return {
     // Dispatch an action that loads the Kanban lists
     loadLists: () => dispatch(loadLists()),
+    // Dispatch an action to move a task to another list
+    moveTask: (sourceTasklist, destinationTasklist, task) => dispatch(moveTask(sourceTasklist, destinationTasklist, task)),
   };
 }
 

@@ -6,7 +6,7 @@ import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import { LOAD_TASKS, DELETE_TASK } from './constants';
 import { loadTasks, loadTasksSuccess, loadTasksFailure } from './actions';
-import tasksApiService from '../../services/tasksApiService';
+import { listTasks, deleteTask } from '../../services/tasksApiService';
 
 // Sagas
 
@@ -17,7 +17,7 @@ export function* loadTasksSaga() {
 
 export function* deleteTaskSaga() {
   // Take every request to delete a task
-  yield* takeEvery(DELETE_TASK, deleteTask);
+  yield* takeEvery(DELETE_TASK, deleteTaskSagaAction);
 }
 
 // Functions
@@ -25,7 +25,7 @@ export function* deleteTaskSaga() {
 function* loadTasksSagaAction(action) {
   try {
     // Wait until the tasks are loaded
-    const tasks = yield call(tasksApiService.list, action.listId);
+    const tasks = yield call(listTasks, action.listId);
 
     // Then dispatch the action to notify the success
     yield put(loadTasksSuccess(action.listId, tasks.items || []));
@@ -35,10 +35,10 @@ function* loadTasksSagaAction(action) {
   }
 }
 
-function* deleteTask(action) {
+function* deleteTaskSagaAction(action) {
   try {
     // Wait until the task is deleted
-    yield call(tasksApiService.delete, action.taskList, action.task);
+    yield call(deleteTask, action.taskList, action.task);
   } finally {
     // reload the list
     yield put(loadTasks(action.taskList));

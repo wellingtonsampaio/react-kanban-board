@@ -7,13 +7,13 @@ import { call, put } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { AUTHORIZE_USER } from './constants';
 import { authorizeFailure } from './actions';
-import authApiService from '../../services/authApiService';
+import { authorizeUserOnGapi } from '../../services/authApiService';
 
 // Interact with the API to authorize a user
 function* authorizeUser() {
   try {
     // Wait until the authorization process is completed
-    yield call(authApiService.authorize);
+    yield call(authorizeUserOnGapi);
 
     // On successfull authorization, navigate to the board page
     yield put(push('/board'));

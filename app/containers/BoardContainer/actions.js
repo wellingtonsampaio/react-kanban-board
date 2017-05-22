@@ -6,6 +6,7 @@ import {
  LOAD_LISTS,
  LOAD_LISTS_SUCCESS,
  LOAD_LISTS_FAILURE,
+ MOVE_TASK,
 } from './constants';
 
 // Load the Kanban Lists
@@ -28,5 +29,15 @@ export function loadListsFailure(message) {
   return {
     type: LOAD_LISTS_FAILURE,
     message,
+  };
+}
+
+//  Move a task to another list
+export function moveTask(sourceTasklist, destinationTasklist, task) {
+  return {
+    type: MOVE_TASK,
+    sourceTasklist,
+    destinationTasklist,
+    task,
   };
 }

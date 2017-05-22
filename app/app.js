@@ -32,8 +32,8 @@ import 'sanitize.css/sanitize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Initialize the GAPI client and bootstrap the application
-import authApiService from 'services/authApiService';
-authApiService.initialize();
+import { initializeApi } from 'services/authApiService';
+initializeApi();
 
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
