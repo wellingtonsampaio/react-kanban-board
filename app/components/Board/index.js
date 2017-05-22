@@ -37,19 +37,19 @@ class Board extends React.Component { // eslint-disable-line react/prefer-statel
     // Render a component for the To-Do list if one was informed
     const todoListComponent =
           this.props.lists.todoList !== undefined ?
-            <ListContainer id={this.props.lists.todoList.id} title="To-Do" canMoveTask moveTask={this.onMoveTask}></ListContainer> :
+            <ListContainer id={this.props.lists.todoList.id} title="To-Do" canMoveTask moveTask={this.onMoveTask} canAddTask></ListContainer> :
             <div />;
 
     // Render a component for the Doing list if one was informed
     const doingListComponent =
           this.props.lists.doingList !== undefined ?
-            <ListContainer id={this.props.lists.doingList.id} title="Doing" canMoveTask moveTask={this.onMoveTask}></ListContainer> :
+            <ListContainer id={this.props.lists.doingList.id} title="Doing" canMoveTask moveTask={this.onMoveTask} canAddTask={false}></ListContainer> :
             <div />;
 
     // Render a component for the Done list if one was informed
     const doneListComponent =
           this.props.lists.doneList !== undefined ?
-            <ListContainer id={this.props.lists.doneList.id} title="Done" canMoveTask={false}></ListContainer> :
+            <ListContainer id={this.props.lists.doneList.id} title="Done" canMoveTask={false} canAddTask={false}></ListContainer> :
             <div />;
 
     return (

@@ -4,9 +4,9 @@
 
 import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
-import { LOAD_TASKS, DELETE_TASK } from './constants';
+import { LOAD_TASKS, DELETE_TASK, ADD_TASK } from './constants';
 import { loadTasks, loadTasksSuccess, loadTasksFailure } from './actions';
-import { listTasks, deleteTask } from '../../services/tasksApiService';
+import { listTasks, deleteTask, insertTask } from '../../services/tasksApiService';
 
 // Sagas
 
@@ -18,6 +18,11 @@ export function* loadTasksSaga() {
 export function* deleteTaskSaga() {
   // Take every request to delete a task
   yield* takeEvery(DELETE_TASK, deleteTaskSagaAction);
+}
+
+export function* addTaskSaga() {
+  // Take every request to add a new task
+  yield* takeEvery(ADD_TASK, addTaskSagaAction);
 }
 
 // Functions
@@ -45,9 +50,20 @@ function* deleteTaskSagaAction(action) {
   }
 }
 
+function* addTaskSagaAction(action) {
+  try {
+    // Wait until the task is created
+    yield call(insertTask, action.taskList, action.title);
+  } finally {
+    // reload the list
+    yield put(loadTasks(action.taskList));
+  }
+}
+
 // All sagas to be loaded
 
 export default [
   loadTasksSaga,
   deleteTaskSaga,
+  addTaskSaga,
 ];

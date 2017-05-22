@@ -6,6 +6,7 @@ import {
   LOAD_TASKS,
   LOAD_TASKS_SUCCESS,
   LOAD_TASKS_FAILURE,
+  ADD_TASK,
   DELETE_TASK,
 } from './constants';
 
@@ -31,6 +32,15 @@ export function loadTasksFailure(listId, message) {
   return {
     type: LOAD_TASKS_FAILURE,
     message,
+  };
+}
+
+// Add a task to the given task list
+export function addTask(taskList, title) {
+  return {
+    type: ADD_TASK,
+    taskList,
+    title,
   };
 }
 

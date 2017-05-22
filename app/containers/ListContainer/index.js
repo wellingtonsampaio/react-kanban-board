@@ -5,7 +5,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import selectListContainer from './selectors';
-import { loadTasks, deleteTask } from './actions';
+import { loadTasks, deleteTask, addTask } from './actions';
 
 import List from '../../components/List';
 
@@ -44,6 +44,8 @@ function mapDispatchToProps(dispatch) {
     loadTasks: (listId) => dispatch(loadTasks(listId)),
     // Dispatch an action to delete the given task
     deleteTask: (taskList, task) => dispatch(deleteTask(taskList, task)),
+    // Dispatch an action to add a new task
+    addTask: (taskList, title) => dispatch(addTask(taskList, title)),
   };
 }
 
