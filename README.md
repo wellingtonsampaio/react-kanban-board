@@ -1,5 +1,4 @@
-# React Kanban Board
-[![Build Status](https://travis-ci.org/wellingtonsampaio/react-kanban-board.svg?branch=master)](https://travis-ci.org/wellingtonsampaio/react-kanban-board)
+# React Kanban Board [![Build Status](https://travis-ci.org/wellingtonsampaio/react-kanban-board.svg?branch=master)](https://travis-ci.org/wellingtonsampaio/react-kanban-board)
 
 An online Kanban Board that uses Google Tasks as data store.
 
